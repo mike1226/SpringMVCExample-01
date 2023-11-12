@@ -1,15 +1,22 @@
 package com.example.servingwebcontent;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.mybatis.dynamic.sql.select.SelectDSLCompleter;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.servingwebcontent.entity.Customer;
+import com.example.servingwebcontent.form.CustomerForm;
 import com.example.servingwebcontent.repository.CustomerMapper;
 import com.google.gson.Gson;
 
@@ -18,7 +25,7 @@ import com.google.gson.Gson;
  * The class includes methods for displaying a list of customers, displaying a table of customers, and returning a JSON formatted string representation of the list of customers.
  */
 @Controller
-public class CustomerController {
+public class CustomerController  {
 	
 	@Autowired
 	private CustomerMapper mapper;
@@ -75,5 +82,68 @@ public class CustomerController {
 		
 		// 将list以json格式返回
 		return gson.toJson(list);
+	}
+
+	/**
+	 * Returns the name of the view to be rendered, which is "add".
+	 *
+	 * @return the name of the view to be rendered
+	 */
+	@GetMapping("/add")
+	public String add(CustomerForm customerForm) {
+		//model.addAttribute("user", new CustomerForm());
+		return "add";
+	}
+
+	/**
+	 * Returns a string representation of the object.
+	 *
+	 * @return a string representation of the object.
+	 */
+	@PostMapping("/addCustomer")
+	public String addCustomer(@Validated CustomerForm customerForm, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+            return "add";
+        }
+
+		Customer customerEntity = new Customer();
+		BeanUtils.copyProperties(customerForm, customerEntity);
+		mapper.insert(customerEntity);
+		return "table";
+	}
+
+	@GetMapping("/edit/{id}")
+	public String getEdit(CustomerForm customerForm, @PathVariable("id") String id) {
+		Optional<Customer> customer = mapper.selectByPrimaryKey(id);
+		BeanUtils.copyProperties(customer.get(), customerForm);
+		return "edit";
+	}
+
+	/**
+	 * Returns a string representation of the object.
+	 *
+	 * @return a string representation of the object.
+	 */
+	@PostMapping("/editCustomer")
+	public String editCustomer(@Validated CustomerForm customerForm, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+            return "edit";
+        }
+
+		Customer customerEntity = new Customer();
+		BeanUtils.copyProperties(customerForm, customerEntity);
+		mapper.updateByPrimaryKey(customerEntity);
+		return "table";
+	}
+
+	/**
+	 * The String class represents character strings. All string literals in Java programs, such as "abc", are implemented as instances of this class.
+	 */
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable("id") String id) {
+		mapper.deleteByPrimaryKey(id);
+		return "table";
 	}
 }
