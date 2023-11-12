@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>添加用户</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.jp/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body class="p-3 m-0 border-0 bd-example m-0 ">
+    <!--创建新建用户的表单-->
+    <form class ="row g-3" action="#" th:action="@{/editCustomer}" th:object="${customerForm}" method="post">
+        <div class="col-8">
+            <label for="inputId" class="form-label">用户ID:</label>
+            <input id="inputId" type="text" class="form-control " th:field="*{id}" disabled/>
+            <input d="inputHdnId"  type = "hidden" th:field="*{id}"/>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
+        </div>
+
+        <div class="col-8">
+            <label for="inputUserName" class="form-label">用户名:</label>
+            <input id="inputUserName" type="text" class="form-control" th:field="*{username}" disabled/>
+            <input id="inputHdnUserName" type = "hidden" th:field="*{username}"/>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+        </div>
+
+        <div class="col-8">
+            <label for="inputEmail" class="form-label">邮箱:</label>
+            <input id="inputEmail" type="text" class="form-control" th:field="*{email}" placeholder="name@example.com" />
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        </div>
+
+        <div class="col-8">
+            <label for="inputPhone" class="form-label">电话号码:</label>
+            <input id="inputPhone" type="text" class="form-control" th:field="*{phoneNumber}" />
+        </div>
+        <div class="col-8">
+            <label for="inputPostCode" class="form-label">邮政编码:</label>
+            <input id="inputPostCode" type="text" class="form-control" th:field="*{postCode}" />
+        </div>
+
+        <div class="col-8"><button type="submit" class="btn btn-primary">提交</button></div>
+
+    </form>
+
+</body>
+
+</html>
