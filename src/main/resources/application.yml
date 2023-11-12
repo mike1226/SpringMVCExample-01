@@ -1,0 +1,13 @@
+# データソース
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+
+    
+# MyBatis
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

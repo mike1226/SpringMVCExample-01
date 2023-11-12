@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <context id="context1">
+ 
+<!--     JDBCの設定です (1) -->
+        <jdbcConnection
+            driverClass="org.postgresql.Driver"
+            connectionURL="jdbc:postgresql://localhost:5432/postgres"
+            userId="postgres"
+            password="postgres"
+        />
+ 
+<!--     自動生成するエンティティの設定です (2) -->
+        <javaModelGenerator
+            targetPackage="com.example.servingwebcontent.entity"
+            targetProject="gs-serving-web-content-complete/src/main/java/"
+        />
+
+ <!--     自動生成するリポジトリの設定です (3) -->       
+        <javaClientGenerator
+            targetPackage="com.example.servingwebcontent.repository"
+            targetProject="gs-serving-web-content-complete/src/main/java/"
+            type="XMLMAPPER"
+        />
+ 
+<!--     生成対象のテーブルです（4) -->
+        <table schema="public" tableName="customer" />
+    </context>
+</generatorConfiguration>
