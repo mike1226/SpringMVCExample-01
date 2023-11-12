@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.servingwebcontent.entity.Customer;
 import com.example.servingwebcontent.repository.CustomerMapper;
-import com.google.gson.Gson;
 
 @Controller
 public class CustomerController {
@@ -36,21 +35,5 @@ public class CustomerController {
 		
 		model.addAttribute(names, list);
 		return "list";
-	}
-
-	@GetMapping("/table")
-	public String initTable(Model model) {
-	
-		return "table";
-	}
-
-	@GetMapping("/showTable")
-	@ResponseBody
-	public String showTable() {
-		Gson gson = new Gson(); 
-		List<Customer> list = mapper.select(SelectDSLCompleter.allRows());
-		
-		// 将list以json格式返回
-		return gson.toJson(list);
 	}
 }
