@@ -41,7 +41,7 @@ public class CountryController {
 		}
 
 		Optional<CountryEntity> countryEntity = mapper.selectByPrimaryKey(countrySearchForm.getMstCountryCD());
-		if (countryEntity.get() == null) {
+		if (countryEntity == null) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 		return new Gson().toJson(countryEntity.get());

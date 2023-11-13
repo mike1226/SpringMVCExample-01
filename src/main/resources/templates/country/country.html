@@ -48,11 +48,13 @@
                 $.ajax({
                     type: "POST",
                     url: "/Country/GetCountry",
-                    data: $("#frmDetail").serialize(),
+                    data: $("#frmSearch").serialize(),
+                    dataType: 'json',
                     success: function (data) {
+                        $("#detailContains").css("display", "block");
                         // show the data in the detailContains
-                        $("#countryCodeInput").val(data.countryCode);
-                        $("#countryNameInput").val(data.countryName);
+                        $("#countryCodeInput").val(data.mstcountrycd);
+                        $("#countryNameInput").val(data.mstcountrynanme);
                     },
                     error: function (e) {
                         alert("error");
@@ -104,7 +106,7 @@
                     <div id="queryContainer" style="display:none">
                         <!--action is controller function name-->
                         <!--th:action="@{/GetCountry}" th:object="${queryForm}"-->
-                        <form action="#" th:action="@{/Country/GetCountry}" th:object="${countrySearchForm}" method="post">
+                        <form  id="frmSearch" action="#" th:action="@{/Country/GetCountry}" th:object="${countrySearchForm}" method="post">
                             <!--when query button on click, will post data to controller-->
                             <div class="m-3">
                                 <label for="queryInput" class="form-label">国家编码</label>
