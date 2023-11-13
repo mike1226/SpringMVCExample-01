@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>国名Mst</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.jp/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#detailContains").css("display", "none");
+            // when click the create button, show the detailContains
+            $("#selCreate").on('click', function () {
+                // show the detailContains
+                $("#detailContains").css("display", "block");
+                // hide the queryContainer
+                $("#queryContainer").css("display", "none");
+            });
+
+            // when click the update button, show the queryContainer
+            $("#selUpdate, #selDelete").on('click', function () {
+                // show the queryContainer
+                $("#queryContainer").css("display", "block");
+                // hide the detailContains
+                $("#detailContains").css("display", "none");
+                // set the form action for update
+                $("#frmDetail").attr("action", "/UpdateCountry");
+            });
+
+            // when click the return button, hide the detailContains
+            $("#returnBtn").on('click', function () {
+                // show the queryContainer
+                // $("#queryContainer").css("display", "block");
+                // hide the detailContains
+                $("#detailContains").css("display", "none");
+            });
+
+            $("#queryBtn").on('click', function () {
+                // use ajax to post data to controller
+                // recived the data from controller with json
+                // show the data in the detailContains
+                $.ajax({
+                    type: "POST",
+                    url: "/Country/GetCountry",
+                    data: $("#frmDetail").serialize(),
+                    success: function (data) {
+                        // show the data in the detailContains
+                        $("#countryCodeInput").val(data.countryCode);
+                        $("#countryNameInput").val(data.countryName);
+                    },
+                    error: function (e) {
+                        alert("error");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="p-3 m-0 border-0 bd-example m-0 col-8 ">
+        <div id="headerContains" class="container col-10">
+            <!--show icon-->
+            <div class="container bg-primary">
+                <div class="container col-2 align-middle">
+                    <a class="btn btn-primary " data-bs-toggle="collapse" href="#collapseHeader" role="button"
+                        aria-expanded="false" aria-controls="collapseHeader">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="collapse show align-middle" id="collapseHeader">
+                <div class="card card-body">
+                    <!--show dropdowns-->
+                    <div class="btn-group col-2">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            操作
+                        </button>
+                        <!--dropdown list-->
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="selCreate">新规</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#" id="selUpdate">修改</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#" id="selDelete">删除</a></li>
+                        </ul>
+                    </div>
+                    <!--show query area-->
+                    <div id="queryContainer" style="display:none">
+                        <!--action is controller function name-->
+                        <!--th:action="@{/GetCountry}" th:object="${queryForm}"-->
+                        <form action="#" th:action="@{/Country/GetCountry}" th:object="${queryForm}" method="post">
+                            <!--when query button on click, will post data to controller-->
+                            <div class="m-3">
+                                <label for="queryInput" class="form-label">国家编码</label>
+                                <input type="text" class="form-control" id="queryInput" th:field="*{mstCountryCD}">
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button id="queryBtn" type="button" class="btn btn-primary me-md-2">查询</button>
+                                <button type="clearBtb" class="btn btn-secondary ">清空</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="detailContains" class="container col-10">
+            <!--show icon-->
+            <div class="container bg-primary">
+                <div class="container col-2 align-middle">
+                    <a class="btn btn-primary " data-bs-toggle="collapse" href="#collapseDetail" role="button"
+                        aria-expanded="false" aria-controls="collapseDetail">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                        </svg></a>
+                </div>
+            </div>
+
+            <div class="collapse show" id="collapseDetail">
+                <div class="card card-body">
+                    <!-- th:object -->
+                    <form id="frmDetail" action="#" method="post">
+                        <div class="mb-3">
+                            <label for="countryCodeInput" class="form-label">Email address</label>
+                            <input type="text" class="form-control" id="countryCodeInput" placeholder="country code">
+                        </div>
+                        <div class="mb-3">
+                            <label for="countryNameInput" class="form-label">Example textarea</label>
+                            <input type="text" class="form-control" id="countryNameInput"></input>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button id="updateBtn" type="button" class="btn btn-primary me-md-2">更新</button>
+                            <button id="returnBtn" type="button" class="btn btn-secondary ">返回</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

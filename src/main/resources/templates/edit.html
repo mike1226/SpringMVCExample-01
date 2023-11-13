@@ -16,7 +16,7 @@
         <div class="col-8">
             <label for="inputId" class="form-label">用户ID:</label>
             <input id="inputId" type="text" class="form-control " th:field="*{id}" disabled/>
-            <input d="inputHdnId"  type = "hidden" th:field="*{id}"/>
+            <input id="inputHdnId"  type = "hidden" th:field="*{id}"/>
             <div class="alert alert-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
         </div>
 

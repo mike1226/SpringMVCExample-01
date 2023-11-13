@@ -28,3 +28,19 @@ we use JQuery plguin [Data Tables] to show tables.
 a most of jquery to oprater DOM and Style
 
 https://api.jquery.com/
+
+## PA
+
+Layout
+https://getbootstrap.jp/docs/5.3/examples/grid/
+
+Collapse
+https://getbootstrap.jp/docs/5.3/components/collapse/
+
+Action
+https://getbootstrap.jp/docs/5.3/components/dropdowns/
+
+mock db data
+https://generatedata.com/
+
+
