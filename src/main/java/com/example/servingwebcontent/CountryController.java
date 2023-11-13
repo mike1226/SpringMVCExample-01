@@ -5,12 +5,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -26,9 +24,8 @@ public class CountryController {
 	private CountryEntityMapper mapper;
 
 	@GetMapping("/Country")
-	public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
-			Model model) {
-		model.addAttribute("name", name);
+	public String init(CountrySearchForm countrySearchForm) {
+
 		return "country/country";
 	}
 
@@ -44,10 +41,10 @@ public class CountryController {
 		}
 
 		Optional<CountryEntity> countryEntity = mapper.selectByPrimaryKey(countrySearchForm.getMstCountryCD());
-		if (countryEntity == null) {
+		if (countryEntity.get() == null) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
-		return new Gson().toJson(countryEntity);
+		return new Gson().toJson(countryEntity.get());
 	}
 
 }

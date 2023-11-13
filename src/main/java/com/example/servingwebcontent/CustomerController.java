@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.mybatis.dynamic.sql.select.SelectDSLCompleter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,11 +25,10 @@ import com.google.gson.Gson;
  * The class includes methods for displaying a list of customers, displaying a table of customers, and returning a JSON formatted string representation of the list of customers.
  */
 @Controller
-@Component
 public class CustomerController  {
 	
 	@Autowired
-	CustomerMapper mapper;
+	private CustomerMapper mapper;
 
 	/**
 	 * Represents a sequence of characters. In this case, it is used to store a list of customer names.
