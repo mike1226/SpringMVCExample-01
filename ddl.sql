@@ -1,5 +1,5 @@
 CREATE TABLE Country (
- MstCountryCD CHAR(10) NOT NULL,
+ MstCountryCD character varying(10) NOT NULL,
  MstCountryNanme CHAR(20),
  UpdateDt  DECIMAL(10),
  DeleteDt DECIMAL(10)
@@ -10,7 +10,7 @@ ALTER TABLE Country ADD CONSTRAINT PK_Country PRIMARY KEY (MstCountryCD);
 
 CREATE TABLE Province (
  ProvCode CHAR(10) NOT NULL,
- MstCountryCD CHAR(10) NOT NULL,
+ MstCountryCD character varying(10) NOT NULL,
  ProvName CHAR(20) NOT NULL
 );
 
