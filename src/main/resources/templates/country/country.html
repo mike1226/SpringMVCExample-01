@@ -11,61 +11,10 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $("#detailContains").css("display", "none");
-            // when click the create button, show the detailContains
-            $("#selCreate").on('click', function () {
-                // show the detailContains
-                $("#detailContains").css("display", "block");
-                // hide the queryContainer
-                $("#queryContainer").css("display", "none");
-            });
-
-            // when click the update button, show the queryContainer
-            $("#selUpdate, #selDelete").on('click', function () {
-                // show the queryContainer
-                $("#queryContainer").css("display", "block");
-                // hide the detailContains
-                $("#detailContains").css("display", "none");
-                // set the form action for update
-                $("#frmDetail").attr("action", "/UpdateCountry");
-            });
-
-            // when click the return button, hide the detailContains
-            $("#returnBtn").on('click', function () {
-                // show the queryContainer
-                // $("#queryContainer").css("display", "block");
-                // hide the detailContains
-                $("#detailContains").css("display", "none");
-            });
-
-            $("#queryBtn").on('click', function () {
-                // use ajax to post data to controller
-                // recived the data from controller with json
-                // show the data in the detailContains
-                $.ajax({
-                    type: "POST",
-                    url: "/Country/GetCountry",
-                    data: $("#frmSearch").serialize(),
-                    dataType: 'json',
-                    success: function (data) {
-                        $("#detailContains").css("display", "block");
-                        // show the data in the detailContains
-                        $("#countryCodeInput").val(data.mstcountrycd);
-                        $("#countryNameInput").val(data.mstcountrynanme);
-                    },
-                    error: function (e) {
-                        alert("error");
-                    }
-                });
-            });
-        });
-    </script>
 </head>
 
 <body>
+    <script th:src="@{/js/country.js}"></script>
     <div class="p-3 m-0 border-0 bd-example m-0 col-8 ">
         <div id="headerContains" class="container col-10">
             <!--show icon-->

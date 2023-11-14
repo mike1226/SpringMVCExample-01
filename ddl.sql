@@ -1,6 +1,6 @@
 CREATE TABLE Country (
- MstCountryCD character varying(10) NOT NULL,
- MstCountryNanme CHAR(20),
+ MstCountryCD varchar(10) NOT NULL,
+ MstCountryNanme varchar(20),
  UpdateDt  DECIMAL(10),
  DeleteDt DECIMAL(10)
 );
@@ -9,9 +9,9 @@ ALTER TABLE Country ADD CONSTRAINT PK_Country PRIMARY KEY (MstCountryCD);
 
 
 CREATE TABLE Province (
- ProvCode CHAR(10) NOT NULL,
- MstCountryCD character varying(10) NOT NULL,
- ProvName CHAR(20) NOT NULL
+ ProvCode varchar(10) NOT NULL,
+ MstCountryCD varchar(10) NOT NULL,
+ ProvName varchar(20) NOT NULL
 );
 
 ALTER TABLE Province ADD CONSTRAINT PK_Province PRIMARY KEY (ProvCode,MstCountryCD);
@@ -44,15 +44,15 @@ VALUES
   ('Voronezh Oblast','66361','5492'),
   ('Xīnán','668562','5492'),
   ('Utah','854524','5492'),
-  ('Lào Cai','1548-1275','5492'),
-  ('New South Wales','8564 KR','5492'),
-  ('Junín','61142-161','5492'),
+  ('Lào Cai','15481275','5492'),
+  ('New South Wales','8564KR','5492'),
+  ('Junín','61142161','5492'),
   ('Guerrero','8851','5492'),
   ('Lima','89075','5492'),
-  ('Oost-Vlaanderen','A8V 1B5','5492'),
+  ('Oost-Vlaanderen','A8V1B5','5492'),
   ('West-Vlaanderen','24514','5492'),
   ('Bremen','14261','5492'),
-  ('Saskatchewan','47264-64868','5492'),
+  ('Saskatchewan','47264868','5492'),
   ('Małopolskie','38845','5492'),
   ('Kaliningrad Oblast','7875','5492'),
   ('Gilgit Baltistan','388423','3489'),
@@ -64,5 +64,5 @@ VALUES
   ('Pernambuco','28123','3489'),
   ('South Island','802342','3489'),
   ('Gauteng','44116','3489'),
-  ('New South Wales','12734-21512','3489');
+  ('New South Wales','1273212','3489');
 

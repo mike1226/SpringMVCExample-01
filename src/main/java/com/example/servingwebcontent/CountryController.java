@@ -23,7 +23,7 @@ public class CountryController {
 	@Autowired
 	private CountryEntityMapper mapper;
 
-	@GetMapping("/Country")
+	@GetMapping("/country")
 	public String init(CountrySearchForm countrySearchForm) {
 
 		return "country/country";
@@ -33,7 +33,7 @@ public class CountryController {
 	 * Represents a sequence of characters. In this context, it is used to return a
 	 * JSON representation of a CountryEntity object.
 	 */
-	@PostMapping("/Country/GetCountry")
+	@PostMapping("/country/getCountry")
 	@ResponseBody
 	public String getCountry(@Validated CountrySearchForm countrySearchForm, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
