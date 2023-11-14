@@ -17,7 +17,7 @@
             targetProject="gs-serving-web-content-complete/src/main/java/"
         />
 
- <!--     自動生成するリポジトリの設定です (3) -->       
+ <!--     自動生成するリポジトリの設定です (3) -->
         <javaClientGenerator
             targetPackage="com.example.servingwebcontent.repository"
             targetProject="gs-serving-web-content-complete/src/main/java/"
@@ -26,5 +26,8 @@
  
 <!--     生成対象のテーブルです（4) -->
         <table schema="public" tableName="customer" />
+        <table schema="public" tableName="country" domainObjectName="CountryEntity"/>
+         <table schema="public" tableName="Province" domainObjectName="ProvinceEntity"/>
+        
     </context>
 </generatorConfiguration>
