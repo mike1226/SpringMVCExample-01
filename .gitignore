@@ -39,4 +39,8 @@ target
 secrets.yml
 .gradletasknamecache
 .sts4-cache
-gradle/wrapper/gradle-wrapper.jar
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Avoid ignore Gradle wrappper properties
+!gradle-wrapper.properties
