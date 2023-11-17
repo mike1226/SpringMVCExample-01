@@ -1,13 +1,12 @@
 package com.example.servingwebcontent.repository;
 
 import static com.example.servingwebcontent.repository.ProvinceEntityDynamicSqlSupport.*;
-import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
+import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
-import com.example.servingwebcontent.entity.ProvinceEntity;
-import jakarta.annotation.Generated;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.ResultMap;
@@ -28,6 +27,10 @@ import org.mybatis.dynamic.sql.util.mybatis3.CommonDeleteMapper;
 import org.mybatis.dynamic.sql.util.mybatis3.CommonInsertMapper;
 import org.mybatis.dynamic.sql.util.mybatis3.CommonUpdateMapper;
 import org.mybatis.dynamic.sql.util.mybatis3.MyBatis3Utils;
+
+import com.example.servingwebcontent.entity.ProvinceEntity;
+
+import jakarta.annotation.Generated;
 
 @Mapper
 public interface ProvinceEntityMapper extends CommonCountMapper, CommonDeleteMapper, CommonInsertMapper<ProvinceEntity>, CommonUpdateMapper {

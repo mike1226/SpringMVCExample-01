@@ -1,9 +1,11 @@
 package com.example.servingwebcontent.repository;
 
-import jakarta.annotation.Generated;
 import java.sql.JDBCType;
+
 import org.mybatis.dynamic.sql.AliasableSqlTable;
 import org.mybatis.dynamic.sql.SqlColumn;
+
+import jakarta.annotation.Generated;
 
 public final class CountryEntityDynamicSqlSupport {
 
@@ -20,8 +22,8 @@ public final class CountryEntityDynamicSqlSupport {
 
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2023-11-14T00:52:28.567869+09:00", comments = "Source Table: public.country")
 	public static final class CountryEntity extends AliasableSqlTable<CountryEntity> {
-		public final SqlColumn<String> mstcountrycd = column("mstcountrycd", JDBCType.CHAR);
-		public final SqlColumn<String> mstcountrynanme = column("mstcountrynanme", JDBCType.CHAR);
+		public final SqlColumn<String> mstcountrycd = column("mstcountrycd", JDBCType.VARCHAR);
+		public final SqlColumn<String> mstcountrynanme = column("mstcountrynanme", JDBCType.VARCHAR);
 		public final SqlColumn<Long> updatedt = column("updatedt", JDBCType.NUMERIC);
 		public final SqlColumn<Long> deletedt = column("deletedt", JDBCType.NUMERIC);
 
