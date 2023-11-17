@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>国名Mst</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.jp/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/select/1.7.0/css/select.dataTables.min.css" type="text/css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/4.0.0/material-components-web.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.material.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <fieldset class="row mb-3">
+                <legend class="col-form-label col-sm-2">操作</legend>
+                <div class="row mb-3 col-sm-10">
+                    <div class="form-check col-sm-2">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="add">
+                        <label class="form-check-label" for="gridRadios1">
+                            新建
+                        </label>
+                    </div>
+                    <div class="form-check  col-sm-2">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="edit">
+                        <label class="form-check-label" for="gridRadios2">
+                            修改
+                        </label>
+                    </div>
+                    <div class="form-check col-sm-2">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="del">
+                        <label class="form-check-label" for="gridRadios3">
+                            删除
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+        <div id="serachContainer">
+            <div class="mb-3">
+                <label for="countryInput" class="form-label">国家编码</label>
+                <input type="text" class="form-control" id="countryInput" placeholder="nnnn">
+            </div>
+            <button id="searchBtn" type="button" class="btn btn-primary">查询</button>
+        </div>
+        <div id="tableContainer">
+            <table id="prefecture_table" class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>编辑状态</th>
+                        <th>国码</th>
+                        <th>省编码</th>
+                        <th>省名称</th>
+                    </tr>
+                </thead>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Button trigger modal -->
+        <button type="button" id="btnExec" class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop">
+            RUN
+        </button>
+
+        <!-- Modal Edit Area-->
+        <div class="modal fdae col-10" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <form>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">编辑区域</h1>
+                            <div> <span id="currSpan"> </span> / <span id="totalSpan"> </span></div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="countryCd" class="form-label">国码</label>
+                                <input type="text" class="form-control" id="countryCd">
+                            </div>
+                            <div class="mb-3">
+                                <label for="provCd" class="form-label">省编码</label>
+                                <input type="text" class="form-control" id="provCd">
+                            </div>
+                            <div class="mb-3">
+                                <label for="provName" class="form-label">省名称</label>
+                                <input type="text" class="form-control" id="provName">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="closeModalBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button id="oprateBtn" type="button" class="btn btn-primary">执行</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/js/prov.js}"></script>
+</body>
+
+</html>

@@ -1,9 +1,11 @@
 package com.example.servingwebcontent.repository;
 
-import jakarta.annotation.Generated;
 import java.sql.JDBCType;
+
 import org.mybatis.dynamic.sql.AliasableSqlTable;
 import org.mybatis.dynamic.sql.SqlColumn;
+
+import jakarta.annotation.Generated;
 
 public final class ProvinceEntityDynamicSqlSupport {
 
@@ -18,9 +20,9 @@ public final class ProvinceEntityDynamicSqlSupport {
 
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2023-11-14T00:52:28.570343+09:00", comments = "Source Table: public.province")
 	public static final class ProvinceEntity extends AliasableSqlTable<ProvinceEntity> {
-		public final SqlColumn<String> provcode = column("provcode", JDBCType.CHAR);
-		public final SqlColumn<String> mstcountrycd = column("mstcountrycd", JDBCType.CHAR);
-		public final SqlColumn<String> provname = column("provname", JDBCType.CHAR);
+		public final SqlColumn<String> provcode = column("provcode", JDBCType.VARCHAR);
+		public final SqlColumn<String> mstcountrycd = column("mstcountrycd", JDBCType.VARCHAR);
+		public final SqlColumn<String> provname = column("provname", JDBCType.VARCHAR);
 
 		public ProvinceEntity() {
 			super("public.province", ProvinceEntity::new);
