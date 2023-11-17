@@ -1,4 +1,4 @@
-package com.example.servingwebcontent;
+package com.example.servingwebcontent.controller;
 
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 

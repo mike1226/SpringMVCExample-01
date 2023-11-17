@@ -43,4 +43,28 @@ https://getbootstrap.jp/docs/5.3/components/dropdowns/
 mock db data
 https://generatedata.com/
 
+### 应用场景
+通过主键查询一条记录, 进行CRUD
+
+## PB
+### 应用场景 
+
+主从表,对从表数据操作时.
+通过主表,查询从表数据
+编辑选中的从表数据.
+
+## Config Lombok on sts
+
+### 1: download lombok.jar
+https://projectlombok.org/download
+
+### 2: Config as Spring Tools 4
+
+open springsutis.ini and instert with last row
+-javaagent:d:\soft\lombok.jar
+
+
+## Other
+
+[AOP中文解说](https://blog.csdn.net/qq_36551991/article/details/106740138)
 
