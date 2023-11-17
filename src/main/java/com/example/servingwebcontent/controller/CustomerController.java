@@ -1,4 +1,4 @@
-package com.example.servingwebcontent;
+package com.example.servingwebcontent.controller;
 
 import java.util.List;
 import java.util.Optional;
