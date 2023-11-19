@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.servingwebcontent.entity.CountryEntity;
+import com.example.servingwebcontent.form.CountryForm;
 import com.example.servingwebcontent.form.CountrySearchForm;
 import com.example.servingwebcontent.repository.CountryEntityMapper;
 import com.google.gson.Gson;
@@ -53,17 +55,41 @@ public class CountryController {
 		return new Gson().toJson(countryEntity.get());
 	}
 
-	/*
-	 * 创建一个方法，监听/country/createCountry，
-	 * 实现根据请求的参数创建一个CountryEntity对象，并将其插入到数据库中。
+
+	/**
+	 * Returns the name of the view template to render for creating a country.
+	 *
+	 * @param countryForm the form object containing the country data
+	 * @return the name of the view template for adding a country
+	 */
+	@GetMapping("/country/create")
+	public String create(CountryForm countryForm) {
+		return "addCountry";
+	}
+
+	/**
+	 * Creates a new country in the database based on the provided country form.
+	 * 
+	 * @param countryForm the country form containing the details of the country to be created
+	 * @return a string message to be sent back to the frontend
 	 */
 	@PostMapping("/country/createCountry")
 	@ResponseBody
-	public String createCountry(@RequestBody CountryEntity countryEntity) {
-		// Method body goes here
-		// For example, you might save the countryEntity to the database
-		// Then return a success message or the saved entity
-		return "Country created successfully";
+	public String createCountry(CountryForm countryForm){
+
+		// create new entiry
+		CountryEntity countryEntity = new CountryEntity();
+		countryEntity.setMstcountrycd(countryForm.getCd());
+		countryEntity.setMstcountrynanme(countryForm.getName());
+
+		// insert into database
+		mapper.insert(countryEntity);
+
+		countryForm.setCd("");
+		countryForm.setName("");
+
+		return "这是自己写的回给前端的信息";
 	}
+	
 
 }
