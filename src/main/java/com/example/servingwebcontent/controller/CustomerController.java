@@ -43,17 +43,17 @@ public class CustomerController  {
 		return names;
 	}
 
-	/**
-	 * The String class represents character strings.
-	 */
-	@GetMapping("/list")
-	public String list(Model model) {
-		String names = "users";
-		List<Customer> list = mapper.select(SelectDSLCompleter.allRows());
+	// /**
+	//  * The String class represents character strings.
+	//  */
+	// @GetMapping("/list")
+	// public String list(Model model) {
+	// 	String names = "users";
+	// 	List<Customer> list = mapper.select(SelectDSLCompleter.allRows());
 		
-		model.addAttribute(names, list);
-		return "list";
-	}
+	// 	model.addAttribute(names, list);
+	// 	return "list";
+	// }
 
 	/**
 	 * Returns a string representation of an object.

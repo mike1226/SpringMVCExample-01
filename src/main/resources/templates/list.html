@@ -1,49 +1,45 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head> 
-    <title>用户信息一览</title> 
+
+<head>
+    <title>用户信息一览</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.jp/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btn").on('click', function () {
+                $.ajax({
+                    url: "/create",
+                    type: "post",
+                    data: $("#form1").serialize(),
+                    success: function (data) {
+                        // alert("success" + data);
+                        $("#lblMsg").text(data);
+                    },
+                    error: function (data) {
+                        alert("error");
+                    }
+                });
+            });
+        });
+    </script>
 </head>
+
 <body class="p-3 m-0 border-0 bd-example m-0 border-0 bd-example-cssgrid">
-    <!--使用thymeleaf标签, 循环显示对象属性-->
-    <table border="1">
-        <tr>
-            <th>id</th>
-            <th>name</th>
-            <th>email</th>
-            <th>phone_number</th>
-            <th>post_code</th>
-        </tr>
-        <!--Model名users, users下每一个对象名user-->
-        <tr th:each="user:${users}">
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.phoneNumber}"></td>
-            <td th:text="${user.postCode}"></td>
-        </tr>
-    </table>
-    <!--使用DIV对上面的表格重新布局-->
-    <div class="container" style="--bs-gap: .25rem .25rem;">
-    <div class="row bg-primary text-white" >
-        <div class="col-sm-1">ID</div>
-        <div class="col-sm-2">UserName</div>
-        <div class="col-sm-4">Email</div>
-        <div class="col-sm-3">PhoneNumber</div>
-        <div class="col-sm-2">PostCode</div>
-    </div>
-    <!--循环显示数据-->
-    <div class="row border border-danger" style="--bs-gap: .25rem .25rem; " th:each="user:${users}">
-        <div class="col-sm-1" th:text="${user.id}"></div>
-        <div class="col-sm-2" th:text="${user.username}"></div>
-        <div class="col-sm-4" th:text="${user.email}"></div>
-        <div class="col-sm-3" th:text="${user.phoneNumber}"></div>
-        <div class="col-sm-2" th:text="${user.postCode}"></div>
-    </div>
-</div>
+   <label id="lblMsg"></label>
+    <form id="form1" action="#" th:action="@{/create}" th:object="${testForm}" method="post">
+
+        <label>cd</label>
+        <input type="text" id="cd" th:field="*{cd}" />
+        <br>
+        <label>name</label>
+        <input type="text" id="name" th:field="*{name}" />
+        <br>
+        <button id="btn" type="button">Submit</button>
+    </form>
 </body>
+
 </html>
