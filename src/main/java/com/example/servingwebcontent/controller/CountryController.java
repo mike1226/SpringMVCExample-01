@@ -1,10 +1,13 @@
 package com.example.servingwebcontent.controller;
 
+import java.util.List;
 import java.util.Optional;
 
+import org.mybatis.dynamic.sql.select.SelectDSLCompleter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +18,10 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.servingwebcontent.entity.CountryEntity;
+import com.example.servingwebcontent.entity.Customer;
 import com.example.servingwebcontent.form.CountryForm;
 import com.example.servingwebcontent.form.CountrySearchForm;
+import com.example.servingwebcontent.form.TestForm;
 import com.example.servingwebcontent.repository.CountryEntityMapper;
 import com.google.gson.Gson;
 
@@ -25,6 +30,39 @@ public class CountryController {
 
 	@Autowired
 	private CountryEntityMapper mapper;
+
+	/**
+	 * The String class represents character strings.
+	 */
+	@GetMapping("/list")
+	public String list(TestForm testForm) {
+		// String names = "countrys";
+		// List<CountryEntity> list = mapper.select(SelectDSLCompleter.allRows());
+		// model.addAttribute(names, list);
+		// model.addAttribute("testForm", new TestForm());
+		return "list";
+	}
+
+	@PostMapping("/create")
+	@ResponseBody
+	public String createTestCountry(TestForm testForm){
+
+		// create new entity
+		CountryEntity entity = new CountryEntity();
+		// set country cd
+		entity.setMstcountrycd(testForm.getCd());
+		// set country name
+		entity.setMstcountrynanme(testForm.getName());
+		// insert record
+		mapper.insert(entity);
+
+		// clear form attrib
+		testForm.setCd("");
+		testForm.setName("");
+
+		return "这是自己写的回给前端的信息";
+	}
+
 
 	@GetMapping("/country")
 	public String init(CountrySearchForm countrySearchForm) {
@@ -91,5 +129,6 @@ public class CountryController {
 		return "这是自己写的回给前端的信息";
 	}
 	
+
 
 }
