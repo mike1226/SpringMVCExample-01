@@ -1,3 +1,4 @@
+let opration = 0; // 0:init 1:creat 2:update 3:delete
 $(document).ready(function () {
     $("#detailContains").css("display", "none");
     // when click the create button, show the detailContains
@@ -10,6 +11,7 @@ $(document).ready(function () {
         $("#detailContains").css("display", "block");
         // hide the queryContainer
         $("#queryContainer").css("display", "none");
+        opration = 1;
     });
 
     // when click the update button, show the queryContainer
@@ -20,6 +22,13 @@ $(document).ready(function () {
         $("#detailContains").css("display", "none");
         // set the form action for update
         $("#frmDetail").attr("action", "/UpdateCountry");
+        if ($(this).attr("id") == "selUpdate"){
+			// update
+			opration = 2;
+		} else {
+			//delete
+			opration = 3;
+		}
     });
 
     // when click the return button, hide the detailContains
@@ -42,12 +51,78 @@ $(document).ready(function () {
             success: function (data) {
                 $("#detailContains").css("display", "block");
                 // show the data in the detailContains
-                $("#countryCodeInput").val(data.mstcountrycd);
-                $("#countryNameInput").val(data.mstcountrynanme);
+                $("#mstcountrycd").val(data.mstcountrycd);
+                $("#mstcountrynanme").val(data.mstcountrynanme);
             },
             error: function (e) {
                 alert("error");
             }
         });
     });
+    
+    $("#updateBtn").on('click', function (){
+		var url = "";
+		if (opration == 3) {
+			url = "/country/delete";
+		} else if (opration == 2) {
+			url = "/country/update";
+		} else if (opration == 1) {
+			url = "/country/create";
+		} else {
+			alert ("opration error");
+			return;
+		}
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: $("#frmDetail").serialize(),
+			datatype: "json",
+			success: function(data) {
+				if (data.status == 0) {
+					alert(data,message);
+					return;
+				} else {
+					alert("failed");
+					return;
+				}
+			},
+			error: function (e) {
+				alert("Error");
+			 },
+		});
+	});
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 });

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>用户信息一览</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.jp/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body class="p-3 m-0 border-0 bd-example m-0 border-0 bd-example-cssgrid">
+     
+    <!--country-->
+    <table border="1">
+        <tr>
+            <th>mstcountrycd</th>
+            <th>mstcountrynanme</th>
+            <th>updatedt</th>
+            <th>deletedt</th>
+        </tr>
+        <!--Model名country, country下每一个对象名country-->
+        <tr th:each="countryname:${countrynames}">
+            <td th:text="${countryname.mstcountrycd}"></td>
+            <td th:text="${countryname.mstcountrynanme}"></td>
+            <td th:text="${countryname.updatedt}"></td>
+            <td th:text="${countryname.deletedt}"></td>
+        </tr>
+    </table>
+    
+    <!--使用DIV对上面的表格重新布局-->
+    <div class="container" style="--bs-gap: .25rem .25rem;">
+    <div class="row bg-primary text-white" >
+        <div class="col-sm-1">mstcountrycd</div>
+        <div class="col-sm-2">mstcountrynanme</div>
+        <div class="col-sm-4">updatedt</div>
+        <div class="col-sm-3">deletedt</div>
+    </div>
+    <!--循环显示数据-->
+    <div class="row border border-danger" style="--bs-gap: .25rem .25rem; " th:each="countryname:${countrynames}">
+        <div class="col-sm-1" th:text="${countryname.mstcountrycd}"></div>
+        <div class="col-sm-2" th:text="${countryname.mstcountrynanme}"></div>
+        <div class="col-sm-4" th:text="${countryname.updatedt}"></div>
+        <div class="col-sm-3" th:text="${countryname.deletedt}"></div>
+    </div>
+    <div class="p-3 m-0 border-0 bd-example m-0 ">
+
+
+        <table id="customerList" class="display" style="width:100%"></table>
+
+        <button type="button" class="btn btn-primary" onclick="window.location.href='/add1'"> 添加</button>
+
+        <button id="editUser" type="button" class="btn btn-primary"> 编辑</button>
+
+        <button id="removeUser" type="button" class="btn btn-primary"> 删除</button>
+    </div>
+</body>
+</html>

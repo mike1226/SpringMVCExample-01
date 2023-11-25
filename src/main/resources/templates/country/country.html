@@ -55,7 +55,7 @@
                     <div id="queryContainer" style="display:none">
                         <!--action is controller function name-->
                         <!--th:action="@{/GetCountry}" th:object="${queryForm}"-->
-                        <form  id="frmSearch" action="#" th:action="@{/Country/GetCountry}" th:object="${countrySearchForm}" method="post">
+                        <form  id="frmSearch" action="#" th:action="@{/Country/GetCountry}" th:object="${searchForm}" method="post">
                             <!--when query button on click, will post data to controller-->
                             <div class="m-3">
                                 <label for="queryInput" class="form-label">国家编码</label>
@@ -86,14 +86,14 @@
             <div class="collapse show" id="collapseDetail">
                 <div class="card card-body">
                     <!-- th:object -->
-                    <form id="frmDetail" action="#" method="post">
+                    <form id="frmDetail" action="#" th:object="${countryFrom}" method="post">
                         <div class="mb-3">
-                            <label for="countryCodeInput" class="form-label">Email address</label>
-                            <input type="text" class="form-control" id="countryCodeInput" placeholder="country code">
+                            <label for="mstcountrycd" class="form-label">Country mstcountrycd</label>
+                            <input type="text" class="form-control" id="mstcountrycd" placeholder="country code" th:field="*{mstcountrycd}"></input>
                         </div>
                         <div class="mb-3">
-                            <label for="countryNameInput" class="form-label">Example textarea</label>
-                            <input type="text" class="form-control" id="countryNameInput"></input>
+                            <label for="mstcountrynanme" class="form-label">Country mstcountrynanme</label>
+                            <input type="text" class="form-control" id="mstcountrynanme" th:field="*{mstcountrynanme}"></input>
                         </div>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button id="updateBtn" type="button" class="btn btn-primary me-md-2">更新</button>

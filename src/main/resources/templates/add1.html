@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>添加国家</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.jp/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#sub").on('click',function() {
+				$.ajax({
+					url:"/addCountry",
+					type:"post",
+					data:$("#form1").serialize(),
+					success:function(data){
+						alert("成功" + data);			
+					},
+					error:function(){
+						alert("失败");
+					}
+			    });
+			});
+		});
+	</script>
+
+</head>
+
+<body class="p-3 m-0 border-0 bd-example m-0 ">
+    <!--创建新建国家的表单-->
+    <form id="form1" action="#" th:action="@{/addCountry}" th:object="${countryForm}" method="post">
+        <table class="g-3">
+            <tr>
+                <td>mstcountrycd:</td>
+                <td><input type="text" class="form-control" th:field="*{mstcountrycd}" />
+                    <span class="alert alert-danger" th:if="${#fields.hasErrors('mstcountrycd')}" th:errors="*{mstcountrycd}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>mstcountrynanme:</td>
+                <td><input type="text" class="form-control" th:field="*{mstcountrynanme}" />
+                    <span class="alert alert-danger" th:if="${#fields.hasErrors('mstcountrynanme')}"
+                        th:errors="*{mstcountrynanme}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><button id="sub" class="btn btn-primary">提交</button></td>
+            </tr>
+        </table>
+
+</body>
+
+</html>
