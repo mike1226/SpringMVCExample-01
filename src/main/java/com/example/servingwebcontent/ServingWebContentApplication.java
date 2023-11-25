@@ -8,6 +8,7 @@ public class ServingWebContentApplication {
 
     public static void main(String[] args) throws Exception  {
         SpringApplication.run(ServingWebContentApplication.class, args);
+        
     }
 
 }
